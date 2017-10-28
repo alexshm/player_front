@@ -1,0 +1,27 @@
+li {
+    list-style: none;
+    font-size: 20px;
+}
+
+li:before {
+    content:"■";
+    font-size:30px;
+    color: #006666;
+    /*vertical-align:middle;*/
+    line-height:40px;
+}
+
+
+ul:before {
+    content:"■";
+    font-size:30px;
+    color: #006666;
+    vertical-align:middle;
+    line-height:40px;
+}
+
+input[type="text"] {
+    width: 200px;
+}
+
+
