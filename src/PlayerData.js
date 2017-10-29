@@ -24,6 +24,9 @@ class PlayerData extends Component {
             case 'mp4':
                 return <li key={this.props.liKey}> {this.props.liKey}:
                     <input type="text" id={this.props.liKey} onChange={this.props.handleInputChange} name={this.props.liKey} value={this.props.entry}/>
+                    <div>
+                        <embed src={this.props.entry} allowfullscreen="true" width="425" height="344"/>
+                    </div>
 
                 </li>;
             default:
