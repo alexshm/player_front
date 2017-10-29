@@ -27,7 +27,7 @@ export function changeObjectState(keyThatNeedToChange, value, copy) {
                 copy[key] = value;
                 break;
             }
-            else if (typeof copy[key] == 'object') {
+            else if (typeof copy[key] === 'object') {
                 changeObjectState(keyThatNeedToChange,value,copy[key]);
             }
         }

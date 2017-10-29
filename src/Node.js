@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Node.css';
 import {changeObjectState} from './utils'
+import PlayerData from './PlayerData'
 
 class Node extends Component {
 
@@ -38,8 +39,6 @@ class Node extends Component {
                 <li > {liKey}: <input type="text" id={liKey} onChange={this.handleInputChange}/> </li>
             </ul>;
         }
-        //console.log(liKey);
-        //console.log(entry);
         switch (typeof entry) {
             case 'object':
                 return <ul key={liKey}> {liKey}: {this.deepDisplay(entry)} </ul>;
@@ -48,7 +47,7 @@ class Node extends Component {
             case 'number':
                 return <li key={liKey}> {liKey}: <input name={liKey} id={liKey} type="number" onChange={this.handleInputChange} value={entry}/> </li>;
             case 'string':
-                return <li key={liKey}> {liKey}: <input type="text" id={liKey} onChange={this.handleInputChange} name={liKey} value={entry}/></li>;
+                return <PlayerData liKey={liKey} entry ={entry} handleInputChange ={this.handleInputChange}/>
             default : return;
         }
     }
