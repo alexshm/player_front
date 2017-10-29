@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './Node.css';
-import {changeObjectState} from './utils'
-import PlayerData from './PlayerData'
+import {changeObjectState} from './utils';
+import PlayerData from './PlayerData';
+import axios from 'axios';
 
 class Node extends Component {
 
@@ -19,6 +20,7 @@ class Node extends Component {
         super(props);
         this.state = this.props.node;
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSave = this.handleSave.bind(this);
     }
 
     handleInputChange(event) {
@@ -26,7 +28,7 @@ class Node extends Component {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
         let copy = Object.assign({}, this.state);
-        let beforeValue = beforeValue = value.substring(0, value.length - 1);
+        let beforeValue = value.substring(0, value.length - 1);
         console.log(beforeValue);
         changeObjectState(name,value,copy,beforeValue);
         this.setState(copy);
@@ -49,7 +51,7 @@ class Node extends Component {
             case 'number':
                 return <li key={liKey}> {liKey}: <input name={liKey} id={liKey} type="number" onChange={this.handleInputChange} value={entry}/> </li>;
             case 'string':
-                return <PlayerData liKey={liKey} entry ={entry} handleInputChange ={this.handleInputChange}/>
+                return <PlayerData key={liKey} liKey={liKey} entry ={entry} handleInputChange ={this.handleInputChange}/>
             default : return;
         }
     }
@@ -59,8 +61,17 @@ class Node extends Component {
         return (
             <div>
                 {this.deepDisplay(this.state)}
+                <button className="button" onClick={this.handleSave}>Save</button>
             </div>
         );
+    }
+
+    handleSave(event) {
+        axios.post('https://nodesenior.azurewebsites.net/player/'+this.state['id'] ,this.state)
+            .then((response )=> {
+            console.log(response);
+        })
+            .catch(error => console.log(error.response));
     }
 }
 

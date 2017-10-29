@@ -25,4 +25,17 @@ input[type="text"] {
     width: 200px;
 }
 
+.button {
+    background-color: #4c6eaf;
+    border: none;
+    color: white;
+    padding: 15px 200px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 20px;
+    cursor: pointer;
+}
+
 
