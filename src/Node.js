@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Node.css';
-import {getPath} from './utils'
+import {changeObjectState} from './utils'
 
 class Node extends Component {
 
@@ -16,7 +16,6 @@ class Node extends Component {
 
     constructor(props) {
         super(props);
-        //let flatNode= flattenObject(props.node);
         this.state = this.props.node;
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -25,14 +24,9 @@ class Node extends Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-        let path ="";
-        //_.find(this.state, { 'name' });
-        console.log(name ,value);
-        console.log(path);
-        //this.setState({
-        //    [name]: value
-        //});
-        this.setState({ [event.target.id]: event.target.value });
+        let copy = Object.assign({}, this.state);
+        changeObjectState(name,value,copy);
+        this.setState(copy);
     }
 
     checker(entry, liKey) {

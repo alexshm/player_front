@@ -20,39 +20,17 @@ export function flattenObject(ob) {
         return toReturn;
 }
 
-export function getPath(obj, key, value, path) {
-
-    if(typeof obj !== 'object') {
-        return;
-    }
-
-    for(var k in obj) {
-        if(obj.hasOwnProperty(k)) {
-            //console.log(k);
-            var t = path;
-            var v = obj[k];
-            if(!path) {
-                path = k;
+export function changeObjectState(keyThatNeedToChange, value, copy) {
+    for (let key in copy) {
+        if (copy.hasOwnProperty(key)) {
+            if (key === keyThatNeedToChange) {
+                copy[key] = value;
+                break;
             }
-            else {
-                path = path + '.' + k;
-            }
-            if(v === value) {
-                if(key === k) {
-                    return path;
-                }
-                else {
-                    path = t;
-                }
-            }
-            else if(typeof v !== 'object'){
-                path = t;
-            }
-            var res = getPath(v, key, value, path);
-            if(res) {
-                return res;
+            else if (typeof copy[key] == 'object') {
+                changeObjectState(keyThatNeedToChange,value,copy[key]);
             }
         }
-    }
 
+    }
 }
