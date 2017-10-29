@@ -20,15 +20,15 @@ export function flattenObject(ob) {
         return toReturn;
 }
 
-export function changeObjectState(keyThatNeedToChange, value, copy) {
+export function changeObjectState(keyThatNeedToChange, value, copy,beforeValue) {
     for (let key in copy) {
         if (copy.hasOwnProperty(key)) {
-            if (key === keyThatNeedToChange) {
+            if (key === keyThatNeedToChange && copy[key] === beforeValue) {
                 copy[key] = value;
                 break;
             }
             else if (typeof copy[key] === 'object') {
-                changeObjectState(keyThatNeedToChange,value,copy[key]);
+                changeObjectState(keyThatNeedToChange,value,copy[key],beforeValue);
             }
         }
 

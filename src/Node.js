@@ -26,7 +26,9 @@ class Node extends Component {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
         let copy = Object.assign({}, this.state);
-        changeObjectState(name,value,copy);
+        let beforeValue = beforeValue = value.substring(0, value.length - 1);
+        console.log(beforeValue);
+        changeObjectState(name,value,copy,beforeValue);
         this.setState(copy);
     }
 
